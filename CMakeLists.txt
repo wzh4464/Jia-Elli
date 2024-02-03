@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.10) # 指定CMake的最低版本要求
 
 project(EllipseDetector) # 项目名称
 
+# set debug
+set(CMAKE_BUILD_TYPE "Debug")
+
 set(OpenCV_DIR "/home/zihan/opencv2_install/share/OpenCV/") # OpenCV的安装路径
 
 # 设置C++标准
