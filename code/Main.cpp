@@ -23,7 +23,7 @@ string SWORKINGDIR="EllipseDataset/";
 string DBNAME="Dataset#2";//"good2";//"/PrasadImages-DatasetPrasad";//"/RandomImages-Dataset#1";//"/BRhoChange";//
 string TESTIMGNAME="027_0003.jpg";//"163_0037.jpg";//"003_0144.jpg";//"193_0094.jpg";//"175_0026.jpg";//"im3949.jpg";//"177_0074.jpg";//"";//"140_0038.jpg";//"bike_0068.jpg";//
 int MethodId=1;
-//ÍÖÔ²¼ì²â²ÎÊıÉèÖÃ
+//æ¤­åœ†æ£€æµ‹å‚æ•°è®¾ç½®
 float	fThScoreScore = 0.7f;	//0.8
 float	fMinReliability	= 0.5f;	// Const parameters to discard bad ellipses 0.4
 float	fTaoCenters = 0.05f;//0.05 	
@@ -32,7 +32,7 @@ float	MinOrientedRectSide=3.0f;
 
 float	scale=1;
 
-/*º¯ÊıÉùÃ÷*/
+/*å‡½æ•°å£°æ˜*/
 float showT(string sWorkingDir,string imagename, CNEllipseDetector cned,vector<Ellipse> ellsCned,float fThScoreScore,bool showpic=false);
 vector<double> OnImage(string sWorkingDir,string imagename,float fThScoreScore,float fMinReliability,float fTaoCenters,bool showpic=false);
 vector<double> OnImage_salt(string sWorkingDir,string imagename,int saltrate,float fThScoreScore,float fMinReliability,float fTaoCenters,bool showpic=false);
@@ -40,7 +40,7 @@ vector<double> database(string dirName,float fThScoreScore,float fMinReliability
 void OnVideo();
 void SetParameter(map<char,string> Parameter);
 void ReadParameter(int argc,char** argv);
-/*º¯ÊıÊµÏÖ*/
+/*å‡½æ•°å®ç°*/
 void showTime(vector<double> times){
 	cout << "--------------------------------" << endl;
 	cout << "Execution Time: " << endl;
@@ -130,11 +130,11 @@ vector<double> OnImage(string filename,float fThScoreScore,float fMinReliability
 	cvtColor(image, gray, CV_BGR2GRAY);
 
 	// Parameters Settings (Sect. 4.2)
-	int		iThLength = ThLength;//¹ıÂËÌ«¶ÌµÄ»¡
+	int		iThLength = ThLength;//è¿‡æ»¤å¤ªçŸ­çš„å¼§
 	float	fThObb = MinOrientedRectSide;
 	float	fThPos = 1.0f;
 	//float	fTaoCenters = 0.018f;//0.05
-	int 	iNs = 16;//ÏÒÊı
+	int 	iNs = 16;//å¼¦æ•°
 	float	fMaxCenterDistance = sqrt(float(sz.width*sz.width + sz.height*sz.height)) * fTaoCenters;
 
 	//float	fThScoreScore = 0.5f;//0.8	
@@ -169,7 +169,7 @@ vector<double> OnImage(string filename,float fThScoreScore,float fMinReliability
 	cned.DrawDetectedEllipses(resultImage, ellsCned);
 	imshow("Cned", resultImage);
 	if(showpic){
-		_mkdir("result");
+		mkdir("result",S_IRWXU);
 		cvSaveImage("result/resultImage.jpg",&IplImage(resultImage));
 		SaveEllipses("result/result.txt", ellsCned);
 	}
@@ -254,11 +254,11 @@ vector<double> OnImage(string sWorkingDir,string imagename,float fThScoreScore,f
 	cvtColor(image, gray, CV_BGR2GRAY);
 
 	// Parameters Settings (Sect. 4.2)
-	int		iThLength = ThLength;//¹ıÂËÌ«¶ÌµÄ»¡
+	int		iThLength = ThLength;//è¿‡æ»¤å¤ªçŸ­çš„å¼§
 	float	fThObb = MinOrientedRectSide;
 	float	fThPos = 1.0f;
 	//float	fTaoCenters = 0.018f;//0.05
-	int 	iNs = 16;//ÏÒÊı
+	int 	iNs = 16;//å¼¦æ•°
 	float	fMaxCenterDistance = sqrt(float(sz.width*sz.width + sz.height*sz.height)) * fTaoCenters;
 
 	//float	fThScoreScore = 0.5f;//0.8	
@@ -289,7 +289,7 @@ vector<double> OnImage(string sWorkingDir,string imagename,float fThScoreScore,f
 	cned.Detect(gray_clone, ellsCned);
 	vector<double> times = cned.GetTimes();
 	if(showpic){
-		_mkdir("result");
+		mkdir("result",S_IRWXU);
 		SaveEllipses("result/result.txt", ellsCned);
 	}
 	double fmeasure = showT(sWorkingDir,imagename, cned,ellsCned,0.8f,showpic);
@@ -307,7 +307,7 @@ vector<double> database(string sWorkingDir,float fThScoreScore,float fMinReliabi
 	double countsOfFindEllipse=0;
 	double countsOfGetFastCenter=0;
 	vector<string> files;
-	listDir(dirName,files);
+	listDir(dirName,files,true);
 
 	imageName=files.at(1);
 	vector<double> results=OnImage(sWorkingDir,imageName,fThScoreScore,fMinReliability,fTaoCenters);
@@ -365,7 +365,7 @@ int main_OnePic()
 
 	vector<double> results=OnImage(sWorkingDir,imagename,fThScoreScore,fMinReliability,fTaoCenters,true);
 	if(!results.empty()){
-		showTime(results);//ÏÔÊ¾ÔËĞĞĞÅÏ¢
+		showTime(results);//æ˜¾ç¤ºè¿è¡Œä¿¡æ¯
 		waitKey(0);
 		cvDestroyWindow("Cned");
 	}
@@ -405,7 +405,7 @@ int main_allDB(int argc, char** argv)
 	char cnewDir[100];
 	sprintf(cnewDir,"normal/");
 	string newDir=cnewDir;
-	_mkdir(cnewDir);
+	mkdir(cnewDir,S_IRWXU);
 	vector<string> resultString;
 	resultString.push_back("iDir,fThScoreScore,fMinReliability,fTaoCenters,Edge Detection,Pre processing,Grouping,Estimation,Validation,Clustering,WholeTime,F-measure,countsOfFindEllipse,countsOfGetFastCenter");
 
@@ -455,15 +455,15 @@ vector<double> OnImage_salt(string sWorkingDir,string imagename,int saltrate,flo
 	// gray
 	Mat1b gray;
 	cvtColor(image, gray, CV_BGR2GRAY);
-	//salt Ìí¼Ó
+	//salt æ·»åŠ 
 	salt(gray, n*saltrate/100);
 	medianBlur(gray,gray,3);
 	// Parameters Settings (Sect. 4.2)
-	int		iThLength = 16;//¹ıÂËÌ«¶ÌµÄ»¡
+	int		iThLength = 16;//è¿‡æ»¤å¤ªçŸ­çš„å¼§
 	float	fThObb = 3.0f;
 	float	fThPos = 1.0f;
 	//float	fTaoCenters = 0.018f;//0.05
-	int 	iNs = 16;//ÏÒÊı
+	int 	iNs = 16;//å¼¦æ•°
 	float	fMaxCenterDistance = sqrt(float(sz.width*sz.width + sz.height*sz.height)) * fTaoCenters;
 
 	//float	fThScoreScore = 0.5f;//0.8	
@@ -532,7 +532,7 @@ vector<double> database_salt(string sWorkingDir,int saltrate,float fThScoreScore
 		}
 		resultsitem<<imageName<<","<<times[0]<<","<<times[1]<<","<<times[2]<<","<<times[3]<<","<<times[4]<<","<<times[5]<<","<<wholetime<<","<<times[6]<<","<<times[7]<<","<<times[8];
 		resultString.push_back(resultsitem.str());
-		//if((i+1)%10==0){cout<<endl;}//10¸öÊı¾İÒ»¸ö»Ø³µ
+		//if((i+1)%10==0){cout<<endl;}//10ä¸ªæ•°æ®ä¸€ä¸ªå›è½¦
 	}
 	for (unsigned int i=0;i<allTimes.size();i++){
 		times[i]=allTimes[i]/(1.0*files.size());
@@ -592,7 +592,7 @@ int main_salt(int argc, char** argv)
 		char cnewDir[20];
 		sprintf(cnewDir,"%02d/",saltrate);
 		string newDir=cnewDir;
-		_mkdir(cnewDir);
+		mkdir(cnewDir,S_IRWXU);
 		vector<string> resultString;
 		resultString.push_back("iDir,fThScoreScore,fMinReliability,fTaoCenters,Edge Detection,Pre processing,Grouping,Estimation,Validation,Clustering,Totaltimes,F-measure,countsOfFindEllipse,countsOfGetFastCenter");
 		for(iDir=0;iDir<3;iDir++){
@@ -634,12 +634,12 @@ vector<double> detect4s(string sWorkingDir, string imageName){
 	Mat1b gray;
 	cvtColor(imread(wholeImageName), gray, CV_BGR2GRAY);
 	CNEllipseDetector cned;
-	int		iThLength = ThLength;//¹ıÂËÌ«¶ÌµÄ»¡
+	int		iThLength = ThLength;//è¿‡æ»¤å¤ªçŸ­çš„å¼§
 	float	fThPos = 1.0f;
 	float	fThObb = MinOrientedRectSide;
 
 	float	fMaxCenterDistance = 10;
-	int 	iNs = 16;//ÏÒÊı
+	int 	iNs = 16;//å¼¦æ•°
 
 	Size	szPreProcessingGaussKernelSize	= Size(5,5);
 	double	dPreProcessingGaussSigma		= 1.0;
@@ -664,12 +664,12 @@ vector<double> detect4s(string sWorkingDir, string imageName){
 	Counts.push_back(EdgeNumber);
 
 	vector<double> results;
-	// ÓÃÓÚ·ÀÖ¹»º´æÓ°ÏìËÙ¶È
+	// ç”¨äºé˜²æ­¢ç¼“å­˜å½±å“é€Ÿåº¦
 	myselect1=false;myselect2=false;myselect3=false;
 	results=OnImage(sWorkingDir,imageName,fThScoreScore,fMinReliability,fTaoCenters);
 	double fmeasure = results[6];
 	double wholetime=accumulate(results.begin(),results.begin()+6,0.0);
-	// 4¸ö
+	// 4ä¸ª
 	myselect1=true;myselect2=false;myselect3=false;
 	results=OnImage(sWorkingDir,imageName,fThScoreScore,fMinReliability,fTaoCenters);
 	fmeasure = results[6];
@@ -779,7 +779,7 @@ vector<double> database_4s(string sWorkingDir){
 	return Counts;
 }
 int main_TCN()
-{// ±éÀútTCNl
+{// éå†tTCNl
 	string sWorkingDirPath=SWORKINGDIR;
 	string sWorkingDirName[3] = {"PrasadImages-DatasetPrasad","RandomImages-Dataset#1","good2"};
 	
@@ -885,7 +885,7 @@ int main(int argc, char** argv)
 			cout<<filename<<endl;
 			vector<double> results=OnImage(filename,fThScoreScore,fMinReliability, fTaoCenters, true);
 			if(!results.empty()){
-				showTime(results);//ÏÔÊ¾ÔËĞĞĞÅÏ¢
+				showTime(results);//æ˜¾ç¤ºè¿è¡Œä¿¡æ¯
 				waitKey(0);	cvDestroyWindow("Cned");
 				MethodId=0;
 				system("pause");
@@ -894,11 +894,11 @@ int main(int argc, char** argv)
 	}
 	ReadParameter(argc,argv);
 	switch(MethodId){
-	case 1:main_OnePic();//µ¥ÕÅÍ¼Æ¬
+	case 1:main_OnePic();//å•å¼ å›¾ç‰‡
 		break;
-	case 2:main_OneDB();//µ¥¸öÊı¾İ¿â
+	case 2:main_OneDB();//å•ä¸ªæ•°æ®åº“
 		break;
-	case 3:main_allDB(argc, argv);//ÂÛÎÄÖĞÈı¸öÊı¾İ¿â£¬²»Í¬²ÎÊıµÄÊµÑé
+	case 3:main_allDB(argc, argv);//è®ºæ–‡ä¸­ä¸‰ä¸ªæ•°æ®åº“ï¼Œä¸åŒå‚æ•°çš„å®éªŒ
 		break;
 	case 4:main_salt(argc, argv);
 		break;
@@ -929,7 +929,7 @@ int main(int argc, char** argv)
 	default: break;
 	}
 	system("pause");
-	//main_normalDB(argc, argv);//ÂÛÎÄÖĞÈı¸öÊı¾İ¿â£¬²»Í¬²ÎÊıµÄÊµÑé
-	//OnVideo();//ÉãÏñÍ·
+	//main_normalDB(argc, argv);//è®ºæ–‡ä¸­ä¸‰ä¸ªæ•°æ®åº“ï¼Œä¸åŒå‚æ•°çš„å®éªŒ
+	//OnVideo();//æ‘„åƒå¤´
 	return 0;	   
 }

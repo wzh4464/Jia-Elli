@@ -1022,7 +1022,7 @@ void cvCanny3(	const void* srcarr, void* dstarr,
     std::vector<uchar*> stack;
     uchar **stack_top = 0, **stack_bottom = 0;
 
-    CvMat srcstub, *src = cvGetMat( srcarr, &srcstub );//IplImage µ½cvMatµÄ×ª»»
+    CvMat srcstub, *src = cvGetMat( srcarr, &srcstub );//IplImage åˆ°cvMatçš„è½¬æ¢
     CvMat dststub, *dst = cvGetMat( dstarr, &dststub );
 
 	CvMat dxstub, *dx = cvGetMat( dxarr, &dxstub );

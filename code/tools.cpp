@@ -20,7 +20,7 @@ Point2f lineCrossPoint(Point2f l1p1,Point2f l1p2,Point2f l2p1,Point2f l2p2 )
 	Point2f crossPoint;
 	float k1,k2,b1,b2;
 	if (l1p1.x==l1p2.x&&l2p1.x==l2p2.x){
-		crossPoint=Point2f(0,0);//ÎŞĞ§µã
+		crossPoint=Point2f(0,0);//æ— æ•ˆç‚¹
 		return crossPoint;
 	}
 	if (l1p1.x==l1p2.x)
@@ -46,7 +46,7 @@ Point2f lineCrossPoint(Point2f l1p1,Point2f l1p2,Point2f l2p1,Point2f l2p2 )
 	b2=l2p1.y-k2*l2p1.x;
 	if (k1==k2)
 	{
-		crossPoint=Point2f(0,0);//ÎŞĞ§µã
+		crossPoint=Point2f(0,0);//æ— æ•ˆç‚¹
 	}
 	else
 	{
@@ -180,10 +180,10 @@ void PyrDown(string picName)
 	Mat img1=imread(picName);
 	Mat img2;
 	Size sz;
-	//½ğ×ÖËşÏòÏÂ»òÕßÏòÉÏ²ÉÑù²Ù×÷ £¬»ù±¾²»¸Ä±äÍ¼Ïñ³¤¿í±ÈÂÊ
+	//é‡‘å­—å¡”å‘ä¸‹æˆ–è€…å‘ä¸Šé‡‡æ ·æ“ä½œ ï¼ŒåŸºæœ¬ä¸æ”¹å˜å›¾åƒé•¿å®½æ¯”ç‡
 	//pyrDown(img1,img2,sz,BORDER_DEFAULT);
-	pyrUp(img1,img2,sz,BORDER_DEFAULT);
-	pyrUp(img2,img2,sz,BORDER_DEFAULT);
+	pyrUp(img1,img2,sz);
+	pyrUp(img2,img2,sz);
 	namedWindow("WindowOrg");
 	namedWindow("WindowNew");
 	imshow("WindowOrg",img1);
@@ -207,13 +207,13 @@ Mat matResize(Mat src,double scale){
 			resize(src, img2,dsize,CV_INTER_CUBIC);
 		}
 		clock_t end_time=clock();
-		cout<< "Running time is: "<<static_cast<double>(end_time-start_time)/CLOCKS_PER_SEC*1000<<"ms"<<endl;//Êä³öÔËĞĞÊ±¼ä
+		cout<< "Running time is: "<<static_cast<double>(end_time-start_time)/CLOCKS_PER_SEC*1000<<"ms"<<endl;//è¾“å‡ºè¿è¡Œæ—¶é—´
 
-		//CV_INTER_NN - ×î½üÁÚ²îÖµ,
-		//CV_INTER_LINEAR -  Ë«ÏßĞÔ²îÖµ (È±Ê¡Ê¹ÓÃ) 
-		//CV_INTER_AREA -  Ê¹ÓÃÏóËØ¹ØÏµÖØ²ÉÑù¡£µ±Í¼ÏñËõĞ¡Ê±ºò£¬¸Ã·½·¨
-		//¿ÉÒÔ±ÜÃâ²¨ÎÆ³öÏÖ¡£µ±Í¼Ïñ·Å´óÊ±£¬ÀàËÆÓÚ  CV_INTER_NN  ·½·¨.. 
-		//CV_INTER_CUBIC -  Á¢·½²îÖµ. 
+		//CV_INTER_NN - æœ€è¿‘é‚»å·®å€¼,
+		//CV_INTER_LINEAR -  åŒçº¿æ€§å·®å€¼ (ç¼ºçœä½¿ç”¨) 
+		//CV_INTER_AREA -  ä½¿ç”¨è±¡ç´ å…³ç³»é‡é‡‡æ ·ã€‚å½“å›¾åƒç¼©å°æ—¶å€™ï¼Œè¯¥æ–¹æ³•
+		//å¯ä»¥é¿å…æ³¢çº¹å‡ºç°ã€‚å½“å›¾åƒæ”¾å¤§æ—¶ï¼Œç±»ä¼¼äº  CV_INTER_NN  æ–¹æ³•.. 
+		//CV_INTER_CUBIC -  ç«‹æ–¹å·®å€¼. 
 		namedWindow("WindowOrg",CV_WINDOW_AUTOSIZE);
 		namedWindow("WindowNew",CV_WINDOW_AUTOSIZE);
 		imshow("WindowOrg",src);
@@ -224,7 +224,7 @@ Mat matResize(Mat src,double scale){
 	return img2;
 }
 
-//»æÖÆÑ¡³öµÄ»¡¶Î
+//ç»˜åˆ¶é€‰å‡ºçš„å¼§æ®µ
 void showEdge(vector<vector<Point>> points_,Mat& picture)
 {
 	srand( (unsigned)time( NULL ));
@@ -243,7 +243,7 @@ void showEdge(vector<vector<Point>> points_,Mat& picture)
 		int sPoints=Edge.size();
 		for(int iPoint=0;iPoint<sPoints-1;iPoint++){
 			center=Edge.at(iPoint);
-			//²ÎÊıÎª£º³ĞÔØµÄÍ¼Ïñ¡¢Ô²ĞÄ¡¢°ë¾¶¡¢ÑÕÉ«¡¢´ÖÏ¸¡¢ÏßĞÍ  
+			//å‚æ•°ä¸ºï¼šæ‰¿è½½çš„å›¾åƒã€åœ†å¿ƒã€åŠå¾„ã€é¢œè‰²ã€ç²—ç»†ã€çº¿å‹  
 			//circle(picture,center,radius,color); 
 			prev_point=Edge.at(iPoint);
 			current_point=Edge.at(iPoint+1);
@@ -261,7 +261,7 @@ int writeFile(string fileName_cpp,vector<string> vsContent){
 	ofstream out(fileName_cpp);
 	if(!out)
 	{
-		cout<<"¶ÁĞ´ÎÄ¼şÊ§°Ü"<<endl;
+		cout<<"è¯»å†™æ–‡ä»¶å¤±è´¥"<<endl;
 		return -1;
 	}
 	for(vector<string>::iterator i=vsContent.begin();i<vsContent.end();i++){
@@ -277,21 +277,21 @@ int readFile(string fileName_cpp){
 	ifstream in(fileName_cpp);
 	if(!in)
 	{
-		cout<<"¶ÁĞ´ÎÄ¼şÊ§°Ü"<<endl;
+		cout<<"è¯»å†™æ–‡ä»¶å¤±è´¥"<<endl;
 		return -1;
 	}
 	while(getline(in,line))
 	{
-		data.push_back(line);     //¶ÁÈ¡ÎÄ¼şÃ¿Ò»ĞĞÊı¾İ£¬²¢·Åµ½¡°ÈİÆ÷¡±ÀïÃæ
+		data.push_back(line);     //è¯»å–æ–‡ä»¶æ¯ä¸€è¡Œæ•°æ®ï¼Œå¹¶æ”¾åˆ°â€œå®¹å™¨â€é‡Œé¢
 	}
 	in.close();
-	/******±éÀúdataÀïÃæµÄÄÚÈİ******/
+	/******éå†dataé‡Œé¢çš„å†…å®¹******/
 	for(unsigned int i=0;i<data.size();i++)
 	{
 		cout<<data.at(i)<<endl;
 	}
 	return 0;
-	/******±éÀúdataÀïÃæµÄÄÚÈİ******/
+	/******éå†dataé‡Œé¢çš„å†…å®¹******/
 }
 int readFileByChar(string fileName_split){
 
@@ -301,18 +301,18 @@ int readFileByChar(string fileName_split){
 	ifstream in_split(fileName_split);
 	if(!in_split)
 	{
-		cout<<"¶ÁĞ´ÎÄ¼şÊ§°Ü"<<endl;
+		cout<<"è¯»å†™æ–‡ä»¶å¤±è´¥"<<endl;
 		return -1;
 	}
 	while(getline(in_split,line))
 	{
-		data_split.push_back(line);     //¶ÁÈ¡ÎÄ¼şÃ¿Ò»ĞĞÊı¾İ£¬²¢·Åµ½¡°ÈİÆ÷¡±ÀïÃæ
+		data_split.push_back(line);     //è¯»å–æ–‡ä»¶æ¯ä¸€è¡Œæ•°æ®ï¼Œå¹¶æ”¾åˆ°â€œå®¹å™¨â€é‡Œé¢
 	}
 	in_split.close();
-	/******¶ÁÎÄ¼ş******/
-	/******ÌáÈ¡split.txtÎÄ¼şÀïÃæµÄÊı¾İ******/
+	/******è¯»æ–‡ä»¶******/
+	/******æå–split.txtæ–‡ä»¶é‡Œé¢çš„æ•°æ®******/
 
-	/******±éÀúdata_splitÀïÃæµÄÄÚÈİ(Êı¾İ·ÖÀë)******/
+	/******éå†data_splité‡Œé¢çš„å†…å®¹(æ•°æ®åˆ†ç¦»)******/
 	for(unsigned int i=0;i<data_split.size();i++)
 	{
 		cout<<"--------------------"<<endl;
@@ -321,7 +321,7 @@ int readFileByChar(string fileName_split){
 			cout<<getStr(data_split.at(i)).at(j)<<endl;
 		}
 	}
-	/******±éÀúdata_splitÀïÃæµÄÄÚÈİ(Êı¾İ·ÖÀë)******/
+	/******éå†data_splité‡Œé¢çš„å†…å®¹(æ•°æ®åˆ†ç¦»)******/
 	return 0;
 }
 void Trim(string &str)
@@ -330,8 +330,8 @@ void Trim(string &str)
 	int e=str.find_last_not_of(" \t\n");
 	str=str.substr(s,e-s+1);
 }
-/******·ÖÀëÌØ¶¨¸ñÊ½µÄÊı¾İ******/
-//C++ÖĞÃ»ÓĞSplit()Õâ¸ö·½·¨£¬ĞèÒª×Ô¶¨Òåº¯Êı·ÖÀëÊı¾İ£¬¶øC#ºÍJavaÖĞÓĞÕâ¸ö·½·¨
+/******åˆ†ç¦»ç‰¹å®šæ ¼å¼çš„æ•°æ®******/
+//C++ä¸­æ²¡æœ‰Split()è¿™ä¸ªæ–¹æ³•ï¼Œéœ€è¦è‡ªå®šä¹‰å‡½æ•°åˆ†ç¦»æ•°æ®ï¼Œè€ŒC#å’ŒJavaä¸­æœ‰è¿™ä¸ªæ–¹æ³•
 vector<string> getStr(string str)
 {
 	int j=0;
@@ -353,12 +353,12 @@ vector<string> getStr(string str)
 	}
 	return v_a;
 }
-/******·ÖÀëÌØ¶¨¸ñÊ½µÄÊı¾İ******/
+/******åˆ†ç¦»ç‰¹å®šæ ¼å¼çš„æ•°æ®******/
 
 /**
-* path:Ä¿Â¼
-* files£ºÓÃÓÚ±£´æÎÄ¼şÃûµÄvector
-* r£ºÊÇ·ñĞèÒª±éÀú×ÓÄ¿Â¼
+* path:ç›®å½•
+* filesï¼šç”¨äºä¿å­˜æ–‡ä»¶åçš„vector
+* rï¼šæ˜¯å¦éœ€è¦éå†å­ç›®å½•
 */
 void listDir(string real_dir,vector<string>& files,bool r){
 	DIR *pDir;
@@ -371,17 +371,17 @@ void listDir(string real_dir,vector<string>& files,bool r){
 			if (strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0){
 				continue;
 			}
-			if(r){ //Èç¹ûĞèÒª±éÀú×ÓÄ¿Â¼
+			if(r){ //å¦‚æœéœ€è¦éå†å­ç›®å½•
 				childpath=real_dir+ent->d_name;
-				listDir(childpath,files);
+				listDir(childpath,files,r);
 			}
 		}
 		else{
 			absolutepath= real_dir+ent->d_name;
-			files.push_back(ent->d_name);//ÎÄ¼şÃû
+			files.push_back(ent->d_name);//æ–‡ä»¶å
 		}
 	}
-	sort(files.begin(),files.end());//ÅÅĞò
+	sort(files.begin(),files.end());//æ’åº
 }
 void SaveEllipses(const string& fileName, const vector<Ellipse>& ellipses){
 	unsigned n = ellipses.size();
@@ -532,7 +532,7 @@ float Evaluate(const vector<Ellipse>& ellGT, const vector<Ellipse>& ellTest, con
 
 	vector<Mat1b> gts(sz_gt);
 	vector<Mat1b> tests(sz_test);
-	//»æÖÆÃ¿¸öÄ¿±êÍÖÔ²
+	//ç»˜åˆ¶æ¯ä¸ªç›®æ ‡æ¤­åœ†
 	for (unsigned i = 0; i<sz_gt; ++i)
 	{
 		const Ellipse& e = ellGT[i];
@@ -541,7 +541,7 @@ float Evaluate(const vector<Ellipse>& ellGT, const vector<Ellipse>& ellTest, con
 		ellipse(tmp, Point((int)e._xc, (int)e._yc), Size((int)e._a, (int)e._b), e._rad * 180.0 / CV_PI, 0.0, 360.0, Scalar(255), -1);
 		gts[i] = tmp;
 	}
-	//»æÖÆ¼ì²âµÄÍÖÔ²
+	//ç»˜åˆ¶æ£€æµ‹çš„æ¤­åœ†
 	for (unsigned i = 0; i<sz_test; ++i)
 	{
 		const Ellipse& e = ellTest[i];
@@ -556,7 +556,7 @@ float Evaluate(const vector<Ellipse>& ellGT, const vector<Ellipse>& ellTest, con
 	{
 		for (int c = 0; c < overlap.cols; ++c)
 		{
-			//ÖØµşÇøÓòÕ¼Õæ¸öÇøÓòµÄ±ÈÀı Óë±ÈÉÏ²¢´óÓÚãĞÖµ Îª255
+			//é‡å åŒºåŸŸå çœŸä¸ªåŒºåŸŸçš„æ¯”ä¾‹ ä¸æ¯”ä¸Šå¹¶å¤§äºé˜ˆå€¼ ä¸º255
 			overlap(r, c) = TestOverlap(gts[r], tests[c], threshold_overlap) ? uchar(255) : uchar(0);
 		}
 	}
@@ -564,7 +564,7 @@ float Evaluate(const vector<Ellipse>& ellGT, const vector<Ellipse>& ellTest, con
 	int counter = 0;
 
 	vector<bool> vec_gt(sz_gt, false);
-	//¾ØÕóÃ¿ĞĞÓĞÒ»¸ö¾Í´ú±íÕÒµ½
+	//çŸ©é˜µæ¯è¡Œæœ‰ä¸€ä¸ªå°±ä»£è¡¨æ‰¾åˆ°
 	for (unsigned int i = 0; i < sz_test; ++i)
 	{
 		//const Ellipse& e = ellTest[i];

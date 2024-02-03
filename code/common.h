@@ -125,7 +125,7 @@ struct Ellipse
 	};
 
 	bool operator<(const Ellipse& other) const
-	{//ÓÃÓÚÅÅÐò
+	{//ç”¨äºŽæŽ’åº
 		if(_score == other._score)
 		{
 			float lhs_e = _b / _a;

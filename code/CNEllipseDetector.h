@@ -30,7 +30,7 @@ using namespace cv;
 
 #ifndef GLOBAL
 #define GLOBAL
-//ÉùÃ÷È«¾Ö±äÁ¿
+//å£°æ˜å…¨å±€å˜é‡
 	extern bool myselect1;
 	extern bool myselect2;
 	extern bool myselect3;
@@ -55,14 +55,14 @@ using namespace cv;
 struct EllipseData
 {
 	bool isValid;
-	float ta;//»¡aµÄ Æ½ĞĞÏÒÖĞµãÁ¬ÏßÌİ¶È
-	float tb;//»¡bµÄ
-	float ra;//ÏÒaÌİ¶È »¡1ÆğµãºÍ»¡2 ÖĞµãµÄĞ±ÂÊ
-	float rb;//ÏÒbÌİ¶È »¡1ÖĞµãºÍ»¡2 Î²µãµÄĞ±ÂÊ
-	Point2f Ma;//»¡aµÄ Æ½ĞĞÏÒÖĞµãÊı×éµÄÖĞ¼äÔªËØ
-	Point2f Mb;//»¡bµÄ
-	Point2f Cab;//ÍÖÔ²ÖĞĞÄµã
-	vector<float> Sa;// »¡aµÄ Æ½ĞĞÏÒÖĞµãÁ¬ÏßÌİ¶È
+	float ta;//å¼§açš„ å¹³è¡Œå¼¦ä¸­ç‚¹è¿çº¿æ¢¯åº¦
+	float tb;//å¼§bçš„
+	float ra;//å¼¦aæ¢¯åº¦ å¼§1èµ·ç‚¹å’Œå¼§2 ä¸­ç‚¹çš„æ–œç‡
+	float rb;//å¼¦bæ¢¯åº¦ å¼§1ä¸­ç‚¹å’Œå¼§2 å°¾ç‚¹çš„æ–œç‡
+	Point2f Ma;//å¼§açš„ å¹³è¡Œå¼¦ä¸­ç‚¹æ•°ç»„çš„ä¸­é—´å…ƒç´ 
+	Point2f Mb;//å¼§bçš„
+	Point2f Cab;//æ¤­åœ†ä¸­å¿ƒç‚¹
+	vector<float> Sa;// å¼§açš„ å¹³è¡Œå¼¦ä¸­ç‚¹è¿çº¿æ¢¯åº¦
 	vector<float> Sb;//
 };
 

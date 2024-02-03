@@ -43,13 +43,13 @@ void salt(cv::Mat& image, int n);
 //salt
 
 
-//»æÖÆÑ¡³öµÄ»¡¶Î
+//ç»˜åˆ¶é€‰å‡ºçš„å¼§æ®µ
 /**
-ÊäÈë£ºÒ»¸öÏóÏŞµÄ»¡¶ÎÈİÆ÷
-Êä³ö£ºÏÔÊ¾»¡¶Î£¬Ò»¸öÏóÏŞµÄÒ»¸öÑÕÉ«¡£ÑÕÉ«Ëæ»ú
+è¾“å…¥ï¼šä¸€ä¸ªè±¡é™çš„å¼§æ®µå®¹å™¨
+è¾“å‡ºï¼šæ˜¾ç¤ºå¼§æ®µï¼Œä¸€ä¸ªè±¡é™çš„ä¸€ä¸ªé¢œè‰²ã€‚é¢œè‰²éšæœº
 */
 void showEdge(vector<vector<Point>> points_,Mat& picture);
-//»æÖÆÑ¡³öµÄ»¡¶Î
+//ç»˜åˆ¶é€‰å‡ºçš„å¼§æ®µ
 
 //file operation
 int writeFile(string fileName_cpp,vector<string> vsContent);
@@ -57,14 +57,14 @@ int readFile(string fileName_cpp);
 int readFileByChar(string fileName_split);
 void Trim(string &str);
 
-/******·ÖÀëÌØ¶¨¸ñÊ½µÄÊı¾İ******/
-//C++ÖĞÃ»ÓĞSplit()Õâ¸ö·½·¨£¬ĞèÒª×Ô¶¨Òåº¯Êı·ÖÀëÊı¾İ£¬¶øC#ºÍJavaÖĞÓĞÕâ¸ö·½·¨
+/******åˆ†ç¦»ç‰¹å®šæ ¼å¼çš„æ•°æ®******/
+//C++ä¸­æ²¡æœ‰Split()è¿™ä¸ªæ–¹æ³•ï¼Œéœ€è¦è‡ªå®šä¹‰å‡½æ•°åˆ†ç¦»æ•°æ®ï¼Œè€ŒC#å’ŒJavaä¸­æœ‰è¿™ä¸ªæ–¹æ³•
 vector<string> getStr(string str);
-/******·ÖÀëÌØ¶¨¸ñÊ½µÄÊı¾İ******/
+/******åˆ†ç¦»ç‰¹å®šæ ¼å¼çš„æ•°æ®******/
 /**
-* path:Ä¿Â¼
-* files£ºÓÃÓÚ±£´æÎÄ¼şÃûµÄvector
-* r£ºÊÇ·ñĞèÒª±éÀú×ÓÄ¿Â¼
+* path:ç›®å½•
+* filesï¼šç”¨äºä¿å­˜æ–‡ä»¶åçš„vector
+* rï¼šæ˜¯å¦éœ€è¦éå†å­ç›®å½•
 */
 void listDir(string real_dir,vector<string>& files,bool r = false);
 //file operation
