@@ -19,7 +19,7 @@ last update:
 using namespace std;
 using namespace cv;
 
-string SWORKINGDIR="EllipseDataset/";
+string SWORKINGDIR = "/home/zihan/codes/EllipDet/";
 string DBNAME="Dataset#2";//"good2";//"/PrasadImages-DatasetPrasad";//"/RandomImages-Dataset#1";//"/BRhoChange";//
 string TESTIMGNAME="027_0003.jpg";//"163_0037.jpg";//"003_0144.jpg";//"193_0094.jpg";//"175_0026.jpg";//"im3949.jpg";//"177_0074.jpg";//"";//"140_0038.jpg";//"bike_0068.jpg";//
 int MethodId=1;
@@ -383,7 +383,7 @@ int main_OneDB()
 int main_allDB(int argc, char** argv)
 {
 	string sWorkingDirPath=SWORKINGDIR;
-	string sWorkingDirName[3] = {"PrasadImages-DatasetPrasad","RandomImages-Dataset#1","Dataset#2"};
+	string sWorkingDirName[7] = {"Calibration", "Dataset1", "Dataset2", "Occluded", "Overlapping", "PCB", "Prasad"};
 	float afThScoreScore[6]={0.3f,0.4f,0.5f,0.6f,0.7f,0.8f};//0-5
 	float afMinReliability[6]={0.3f,0.4f,0.5f,0.6f,0.7f,0.8f};//0-5
 	float afTaoCenters[6]={0.01f,0.02f,0.03f,0.04f,0.05f,0.6f};//0-5

@@ -2,22 +2,13 @@
     "configurations": [
         {
             "name": "Linux",
-            "includePath": [
-                "${workspaceFolder}/**",
-                "/home/zihan/opencv2_install/include/**"
-            ],
             "defines": [],
             "compilerPath": "/usr/bin/g++",
             "cStandard": "c11",
             "cppStandard": "c++11",
             "intelliSenseMode": "gcc-x64",
-            "browse": {
-                "path": [
-                    "${workspaceFolder}/**",
-                    "/home/zihan/opencv2_install/include/**"
-                ],
-                "limitSymbolsToIncludedHeaders": true
-            }
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json"
+            // "compileCommands": "/home/zihan/codes/elli-compare/Jia-Elli/build/compile_commands.json"
         }
     ],
     "version": 4
