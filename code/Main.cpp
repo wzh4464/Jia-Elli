@@ -888,7 +888,7 @@ int main(int argc, char** argv)
 				showTime(results);//显示运行信息
 				waitKey(0);	cvDestroyWindow("Cned");
 				MethodId=0;
-				system("pause");
+				// system("pause");
 			}
 		}
 	}
@@ -928,7 +928,7 @@ int main(int argc, char** argv)
 		}break;
 	default: break;
 	}
-	system("pause");
+	// system("pause");
 	//main_normalDB(argc, argv);//论文中三个数据库，不同参数的实验
 	//OnVideo();//摄像头
 	return 0;	   
